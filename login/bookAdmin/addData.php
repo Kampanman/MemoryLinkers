@@ -27,7 +27,14 @@ $input_3 = '参考ウェブサイトURL';
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-	<link href="https://fonts.googleapis.com/css?family=Sawarabi+Gothic" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Sawarabi+Gothic" rel="stylesheet">
+  <style>
+    .info:hover{
+      cursor: pointer;
+      color: blue;
+      font-weight: 600;
+    }
+  </style>
 </head>
 
 <body>
@@ -44,43 +51,43 @@ $input_3 = '参考ウェブサイトURL';
 				</button>
 			</p>
 			
-			<!-- アコーディオンエリア -->
-			<div class="collapse container" id="collapseExample">
-					<div class="row col-sm-8">
-							<table id="example" class="display table table-striped" style="">
-									<thead>
-											<tr>
-													<th>#</th>
-													<th>Title</th>
-											</tr>
-									</thead>
-									<tbody>
-											<?php
-											/**
-											 * データテーブルによるnameカラム検索機能
-											 */
-													require_once("config.php");
-													$query ="SELECT DISTINCT name FROM $table_1 ORDER BY name ASC";
-													$sql = mysqli_query($connect,$query);
-													while($row = mysqli_fetch_array($sql))
-													{
-					
-											?>
-											<tr>
-													<td><input type="hidden" value="<?php echo $row["id"];?>"></td>
-													<td><span class="info"><?php echo $row["name"];?></span></td>
-											</tr>
-											<?php } ?>
-									</tbody>
-							</table>
-					</div>
-			</div>
-			<!-- アコーディオンエリアここまで -->
+	<!-- アコーディオンエリア -->
+	<div class="collapse container" id="collapseExample">
+        <div class="row col-sm-8">
+          <table id="example" class="display table table-striped" style="">
+            <thead>
+              <tr>
+                  <th>#</th>
+                  <th>Title</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              /**
+               * データテーブルによるnameカラム検索機能
+               */
+                  require_once("config.php");
+                  $query ="SELECT DISTINCT name FROM $table_1 ORDER BY name ASC";
+                  $sql = mysqli_query($connect,$query);
+                  while($row = mysqli_fetch_array($sql))
+                  {
+
+              ?>
+              <tr>
+                <td><input type="hidden" value="<?php echo $row["id"];?>"></td>
+                <td><span class="info"><?php echo $row["name"];?></span></td>
+              </tr>
+              <?php } ?>
+            </tbody>
+          </table>
+        </div>
+	</div>
+	<!-- アコーディオンエリアここまで -->
 
         	<form action="" method="post" name="form1">
         		<div class="form-group">
         			<label><?= $input_1; ?></label>
-        			<input type="text" name="name" class="form-control" placeholder="<?= $input_1.'を入力して下さい。'; ?>" required>
+        			<input type="text" name="name" id="name" class="form-control" placeholder="<?= $input_1.'を入力して下さい。'; ?>" required>
         		</div>
         		<div class="form-group">
         			<label><?= $input_2; ?></label>
@@ -106,6 +113,13 @@ $('#example').DataTable({
 		this.xxxApi().doAnythng();//ここで処理する
 }
 });
+</script>
+<script>
+  $(".info").click(function(){
+    var val = $(this).text();
+    console.log(val);
+    $("#name").val(val);
+  });
 </script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
 </body>
