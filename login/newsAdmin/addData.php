@@ -30,6 +30,13 @@ $add_input1 = 'ウェブ版の記事URL';
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <link href="https://fonts.googleapis.com/css?family=Sawarabi+Gothic" rel="stylesheet">
+    <style>
+      .info:hover{
+        cursor: pointer;
+        color: blue;
+        font-weight: 600;
+      }
+    </style>
 </head>
 
 <body>
@@ -81,7 +88,7 @@ $add_input1 = 'ウェブ版の記事URL';
         	<form action="" method="post" name="form1">
         		<div class="form-group">
         			<label><?= $input_1; ?></label>
-        			<input type="text" name="name" class="form-control" placeholder="<?= $input_1.'を入力して下さい。'; ?>" required>
+        			<input type="text" name="name" id="name" class="form-control" placeholder="<?= $input_1.'を入力して下さい。'; ?>" required>
         		</div>
         		<div class="form-group">
         			<label><?= $add_input1; ?></label>
@@ -111,6 +118,13 @@ $('#example').DataTable({
         this.xxxApi().doAnythng();//ここで処理する
     }
 });
+</script>
+<script>
+  $(".info").click(function(){
+    var val = $(this).text();
+    console.log(val);
+    $("#name").val(val);
+  });
 </script>
 </body>
 </html>
