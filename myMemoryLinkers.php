@@ -65,6 +65,7 @@
                           <th>#</th>
                           <th>Title</th>
                           <th>Link</th>
+                          <th>Date</th>
                       </tr>
                   </thead>
                   <tbody>
@@ -78,6 +79,7 @@
                           <td><input type="hidden" value="<?php echo $row["id"];?>"></td>
                           <td><?php echo $row["name"];?></td>
                           <td><a href="<?php echo $row["url"];?>" target="_blank" onClick="return confirm('このサイトに移動しますか？')"><?php echo $row["sight"];?></a></td>
+                          <td><?php echo $row["date"];?></td>
                       </tr>
                       <?php } ?>
                   </tbody>
