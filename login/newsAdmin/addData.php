@@ -7,7 +7,7 @@ require_once("config.php");
     { /* 下のname="Submit"のボタンを押すと次のSQL処理が為される */
     	//post all value
     	extract($_POST);
-    	$query = "INSERT INTO $table_1 (`name`, `namesurl`, `sight`, `url`) VALUES ('".$name."', '".$namesurl."', '".$sight."', '".$url."');";
+    	$query = "INSERT INTO $table_1 (`name`, `namesurl`, `sight`, `url`, `date`) VALUES ('".$name."', '".$namesurl."', '".$sight."', '".$url."', '".$date."');";
     	/* idが「Auto Increment」になっている為、SQL構文の中に入れてしまう（値にNULLを指定する等）とエラーになるぞ！ */
 
     	mysqli_query($connect,$query); /* $connectの中に$queryのデータを格納する */
@@ -39,7 +39,7 @@ $add_input1 = 'ウェブ版の記事URL';
     </style>
 </head>
 
-<body>
+<body onload="start()">
 	<div class="container" style="">
 	<div class="row">
     <h3><?= $theme.'登録フォーム';?></h3>
@@ -102,6 +102,12 @@ $add_input1 = 'ウェブ版の記事URL';
         			<label><?= $input_3; ?></label>
         			<input type="url" name="url" class="form-control" placeholder="<?= $input_3.'を入力して下さい。'; ?>" required>
         		</div>
+        		
+        		<p>
+        		    <label for="dayInto">日付を選択して下さい　</label><input type="date" name="dayInto" id="dayInto" min="2020-10-01" required>　
+                    <input type="button" class="btn btn-info form-group" value="日付を確定する" onclick="input()"><label>：日付選択後に必ずこちらを押して下さい</label>
+                </p>
+                <p><label>記事の日付</label>　<input type="text" class="form-inline" name="date" id="date" readonly></p>
         		<div class="form-group">
         			<input type="submit" name="Submit" value="<?= $theme.'を登録する';?>" class="btn btn-primary btn-block">
         		</div>
@@ -118,6 +124,35 @@ $('#example').DataTable({
         this.xxxApi().doAnythng();//ここで処理する
     }
 });
+</script>
+<script>
+    function start(){
+      // 現在に日付を日付ボックスにセット
+      var today = new Date();
+      today.setDate(today.getDate());
+      var yyyy = today.getFullYear();
+      var mm = ("0"+(today.getMonth()+1)).slice(-2);
+      var dd = ("0"+today.getDate()).slice(-2);
+      var setToday = yyyy+'-'+mm+'-'+dd;
+      $("#dayInto").val(setToday);
+      
+      var dtDayInto = new Date(); //現在の日付を取得
+
+      var date = dtDayInto;
+      var fm_date = `${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()}`.replace(/\n|\r/g, ''); //日付を文字列の形に変換
+
+      $("#date").val(fm_date);
+    }
+
+    function input(){
+      var dayInto = $("#dayInto").val();
+      var dtDayInto = new Date(dayInto); //#dayIntoに入力された日付を取得
+
+      var date = dtDayInto;
+      var fm_date = `${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()}`.replace(/\n|\r/g, ''); //日付を文字列の形に変換
+      $("#date").val(fm_date);
+    }
+
 </script>
 <script>
   $(".info").click(function(){

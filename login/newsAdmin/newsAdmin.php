@@ -74,6 +74,7 @@
                         <th>#</th>
                         <th>Title</th>
                         <th>Link</th>
+                        <th>Date</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
@@ -91,6 +92,7 @@
                         <td><input type="hidden" value="<?php echo $row["id"];?>"></td>
                         <td><a href="<?php echo $row["namesurl"];?>" target="_blank" onClick="return confirm('このサイトに移動しますか？')"><?php echo $row["name"];?></a></td>
                         <td><a href="<?php echo $row["url"];?>" target="_blank" onClick="return confirm('このサイトに移動しますか？')"><?php echo $row["sight"];?></a></td>
+                        <td><?php echo $row['date']; ?></td>
                         <td><a href="edit.php?id=<?php echo $row['id']; ?>" class="btn btn-info">EDIT</a></td>
                         <td><a href="delete.php?id=<?php echo $row['id'];?>" class="btn btn-danger" onClick="return confirm('ホントに削除してもいいですか')">DELETE</a></td>
                     </tr>

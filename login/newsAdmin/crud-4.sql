@@ -18,7 +18,8 @@ CREATE TABLE `news` (
   `name` varchar(100) NOT NULL,
   `namesurl` text NOT NULL,
   `sight` varchar(100) NOT NULL,
-  `url` text NOT NULL
+  `url` text NOT NULL,
+  `date` varchar(20) NOT NULL
 ) ENGINE=InnoDB;
 
 ALTER TABLE `news`
