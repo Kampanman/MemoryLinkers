@@ -96,7 +96,7 @@ $add_input1 = 'ウェブ版の記事URL';
         		</div>
         		<div class="form-group">
         			<label><?= $input_2; ?></label>
-        			<input type="text" name="sight" class="form-control" placeholder="<?= $input_2.'を入力して下さい。'; ?>" required>
+        			<input type="text" name="sight" id="sight" class="form-control" placeholder="<?= $input_2.'を入力して下さい。'; ?>" required>
         		</div>
         		<div class="form-group">
         			<label><?= $input_3; ?></label>
