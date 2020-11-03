@@ -26,4 +26,7 @@ ALTER TABLE `googles`
 -- AUTO_INCREMENT for table `googles`
 ALTER TABLE `googles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+SET @i := 0;
+UPDATE `googles` SET `id` = (@i := @i +1);
   
