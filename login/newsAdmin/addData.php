@@ -158,7 +158,7 @@ $('#example').DataTable({
   $(".info").click(function(){
     var val = $(this).text();
     console.log(val);
-    $("#name").val(val);
+    $("#sight").val(val);
   });
 </script>
 </body>
