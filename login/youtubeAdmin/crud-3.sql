@@ -27,3 +27,5 @@ ALTER TABLE `youtube`
 ALTER TABLE `youtube`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
+SET @i := 0;
+UPDATE `youtube` SET `id` = (@i := @i +1);
