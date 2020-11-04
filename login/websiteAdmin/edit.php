@@ -9,9 +9,11 @@ if(isset($_POST['update']))
     $name = htmlspecialchars($_POST['name'], ENT_QUOTES, "UTF-8");
     $sight = htmlspecialchars($_POST['sight'], ENT_QUOTES, "UTF-8");
     $url = htmlspecialchars($_POST['url'], ENT_QUOTES, "UTF-8");
+    $tag_1 = htmlspecialchars($_POST['tag_1'], ENT_QUOTES, "UTF-8");
+    $tag_2 = htmlspecialchars($_POST['tag_2'], ENT_QUOTES, "UTF-8");
     
     
-        $result = mysqli_query($connect, "UPDATE $table_1 SET name='$name',sight='$sight',url='$url' WHERE id=$id");
+        $result = mysqli_query($connect, "UPDATE $table_1 SET name='$name',sight='$sight',url='$url',tag_1='$tag_1',tag_2='$tag_2' WHERE id=$id");
         
         //redirectig to the display page. In our case, it is index.php
         header("Location:websiteAdmin.php"); /* 処理後にどこのファイルに遷移するか */
@@ -31,7 +33,9 @@ while($row = mysqli_fetch_array($result))
     $name = $row['name'];
     $namesurl = $row['namesurl'];
     $sight = $row['sight'];
-    $url = $row['url'];
+		$url = $row['url'];
+		$tag_1 = $row['tag_1'];
+		$tag_2 = $row['tag_2'];
 }
 ?>
 <html>
@@ -74,6 +78,11 @@ while($row = mysqli_fetch_array($result))
 					<div class="form-group">
 						<label>参考ウェブサイトurl</label>
 						<input type="url" name="url" class="form-control" value="<?php echo $url;?>">
+					</div>
+					<div class="form-group">
+						<label>ジャンルタグ</label><br>
+						<input type="text" name="tag_1" class="form-group" value="<?php echo $tag_1;?>">
+						<input type="text" name="tag_2" class="form-group" value="<?php echo $tag_2;?>">
 					</div>
 					<div class="form-group">
 						<input type="submit" value="Update" class="btn btn-primary btn-block" name="update">

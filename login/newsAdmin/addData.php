@@ -65,10 +65,10 @@ $add_input1 = 'ウェブ版の記事URL';
                         <tbody>
                             <?php
                             /**
-                             * データテーブルによるnameカラム検索機能
+                             * データテーブルによるsightカラム検索機能
                              */
                                 require_once("config.php");
-                                $query ="SELECT DISTINCT name FROM $table_1 ORDER BY name ASC";
+                                $query ="SELECT DISTINCT sight FROM $table_1 ORDER BY sight ASC";
                                 $sql = mysqli_query($connect,$query);
                                 while($row = mysqli_fetch_array($sql))
                                 {

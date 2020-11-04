@@ -7,7 +7,7 @@ require_once("config.php");
     { /* 下のname="Submit"のボタンを押すと次のSQL処理が為される */
     	//post all value
     	extract($_POST);
-    	$query = "INSERT INTO $table_1 (`name`, `namesurl`, `sight`, `url`) VALUES ('".$name."', '".$namesurl."', '".$sight."', '".$url."');";
+    	$query = "INSERT INTO $table_1 (`name`, `namesurl`, `sight`, `url`, `tag_1`, `tag_2`) VALUES ('".$name."', '".$namesurl."', '".$sight."', '".$url."', '".$tag_1."', '".$tag_2."');";
     	/* idが「Auto Increment」になっている為、SQL構文の中に入れてしまう（値にNULLを指定する等）とエラーになるぞ！ */
 
     	mysqli_query($connect,$query); /* $connectの中に$queryのデータを格納する */
@@ -29,7 +29,7 @@ $add_input1 = 'ウェブサイトURL';
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
-    .info:hover{
+    .info:hover, .info2:hover{
       cursor: pointer;
       color: blue;
       font-weight: 600;
@@ -58,7 +58,8 @@ $add_input1 = 'ウェブサイトURL';
             <thead>
               <tr>
                 <th>#</th>
-                <th>Title</th>
+                <th>Tag1</th>
+                <th>Tag2</th>
               </tr>
             </thead>
             <tbody>
@@ -67,7 +68,7 @@ $add_input1 = 'ウェブサイトURL';
                * データテーブルによるnameカラム検索機能
                */
                   require_once("config.php");
-                  $query ="SELECT DISTINCT name FROM $table_1 ORDER BY name ASC";
+                  $query ="SELECT DISTINCT `tag_1`, `tag_2` FROM $table_1 ORDER BY tag_1 ASC";
                   $sql = mysqli_query($connect,$query);
                   while($row = mysqli_fetch_array($sql))
                   {
@@ -75,7 +76,8 @@ $add_input1 = 'ウェブサイトURL';
               ?>
               <tr>
                   <td><input type="hidden" value="<?php echo $row["id"];?>"></td>
-                  <td><span class="info"><?php echo $row["name"];?></span></td>
+                  <td><span class="info"><?php echo $row["tag_1"];?></span></td>
+                  <td><span class="info2"><?php echo $row["tag_2"];?></span></td>
               </tr>
               <?php } ?>
             </tbody>
@@ -102,6 +104,11 @@ $add_input1 = 'ウェブサイトURL';
         			<input type="url" name="url" class="form-control" placeholder="<?= $input_3.'を入力して下さい。'; ?>" required>
         		</div>
         		<div class="form-group">
+        			<label>ジャンルタグ</label><br>
+        			<input type="text" name="tag_1" id="tag_1" class="form-group" placeholder="タグを入力して下さい。">
+        			<input type="text" name="tag_2" id="tag_2" class="form-group" placeholder="タグを入力して下さい。">
+        		</div>
+        		<div class="form-group">
         			<input type="submit" name="Submit" value="<?= $theme.'を登録する';?>" class="btn btn-primary btn-block">
         		</div>
         	</form>
@@ -122,7 +129,12 @@ $('#example').DataTable({
   $(".info").click(function(){
     var val = $(this).text();
     console.log(val);
-    $("#name").val(val);
+    $("#tag_1").val(val);
+  });
+  $(".info2").click(function(){
+    var val2 = $(this).text();
+    console.log(val2);
+    $("#tag_2").val(val2);
   });
 </script>
 </body>
