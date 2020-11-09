@@ -231,28 +231,68 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
-$('#example').DataTable({
-    "language" : {"url":"any.json"},
-    "initComplete" : function(settings, json) {
-        this.xxxApi().doAnythng();//ここで処理する
-    }
-});
+
+  $('#example').DataTable({
+        responsive: true,
+        lengthChange: true,
+        info: false,
+        searching: true,
+        paging: true,
+        pagingType: "full_numbers",
+        lengthMenu: [ 10, 20, 50, 100 ],
+        columnDefs: [
+          { targets: 0, visible: false },
+          { targets: 2, width: "50%" }
+        ],
+        language: {
+            url: "//cdn.datatables.net/plug-ins/1.10.20/i18n/Japanese.json"
+        }
+    });
 $('#example_2').DataTable({
-    "language" : {"url":"any.json"},
-    "initComplete" : function(settings, json) {
-        this.xxxApi().doAnythng();//ここで処理する
+    responsive: true,
+    lengthChange: true,
+    info: false,
+    searching: true,
+    paging: true,
+    pagingType: "full_numbers",
+    lengthMenu: [ 10, 20, 50, 100 ],
+    columnDefs: [
+      { targets: 0, visible: false }
+    ],
+    language: {
+        url: "//cdn.datatables.net/plug-ins/1.10.20/i18n/Japanese.json"
     }
 });
 $('#example_3').DataTable({
-    "language" : {"url":"any.json"},
-    "initComplete" : function(settings, json) {
-        this.xxxApi().doAnythng();//ここで処理する
+    responsive: true,
+    lengthChange: true,
+    info: false,
+    searching: true,
+    paging: true,
+    pagingType: "full_numbers",
+    lengthMenu: [ 10, 20, 50, 100 ],
+    columnDefs: [
+      { targets: 0, visible: false },
+      { targets: 2, width: "50%" }
+    ],
+    language: {
+        url: "//cdn.datatables.net/plug-ins/1.10.20/i18n/Japanese.json"
     }
 });
 $('#example_4').DataTable({
-    "language" : {"url":"any.json"},
-    "initComplete" : function(settings, json) {
-        this.xxxApi().doAnythng();//ここで処理する
+    responsive: true,
+    lengthChange: true,
+    info: false,
+    searching: true,
+    paging: true,
+    pagingType: "full_numbers",
+    lengthMenu: [ 10, 20, 50, 100 ],
+    columnDefs: [
+      { targets: 0, visible: false },
+      { targets: 2, width: "50%" }
+    ],
+    language: {
+        url: "//cdn.datatables.net/plug-ins/1.10.20/i18n/Japanese.json"
     }
 });
 </script>
