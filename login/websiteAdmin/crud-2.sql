@@ -28,4 +28,7 @@ ALTER TABLE `webgoogles`
 
 -- AUTO_INCREMENT for table `webgoogles`
 ALTER TABLE `webgoogles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+SET @i := 0;
+UPDATE `webgoogles` SET `id` = (@i := @i +1);
