@@ -25,5 +25,7 @@ ALTER TABLE `youtube`
 
 -- AUTO_INCREMENT for table `youtube`
 ALTER TABLE `youtube`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
+SET @i := 0;
+UPDATE `youtube` SET `id` = (@i := @i +1);
