@@ -27,4 +27,7 @@ ALTER TABLE `news`
 
 -- AUTO_INCREMENT for table `news`
 ALTER TABLE `news`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+SET @i := 0;
+UPDATE `news` SET `id` = (@i := @i +1);
