@@ -213,13 +213,16 @@
                         {
                     ?>
                     <tr>
-                        <td><input type="hidden" value="<?php echo $row["id"];?>"></td>
+                        <td><input type="hidden" value="<?php echo $row["id"];?>"><button class="btn btn-primary lets">視聴する</button></td>
                         <td><?php echo $row["name"];?></td>
                         <td><a href="<?php echo $row["url"];?>" target="_blank" onClick="return confirm('このサイトに移動しますか？')"><?php echo $row["sight"];?></a></td>
                     </tr>
                     <?php } ?>
                 </tbody>
             </table>
+            <form><input type="hidden" name="url" id="url" disabled></form>
+            <div id="vision" align="center"></div>
+        <p></p>
         </div>
         </div>
       </div>
@@ -288,12 +291,35 @@ $('#example_4').DataTable({
     pagingType: "full_numbers",
     lengthMenu: [ 10, 20, 50, 100 ],
     columnDefs: [
-      { targets: 0, visible: false },
+      // { targets: 0, visible: false },
       { targets: 2, width: "50%" }
     ],
     language: {
         url: "//cdn.datatables.net/plug-ins/1.10.20/i18n/Japanese.json"
     }
+});
+$('.lets').click(function(){
+    var click = $(this).parent();
+    var vidurl = click.next("td").next("td").children("a").attr("href");
+    var result = vidurl.substring(32);
+    $("#url").val(result);
+    console.log(result);
+    $.ajax({
+        url: 'visionSet.php',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            "url": result
+        },
+        success: function(data){
+            if(data.result === "OK"){
+                console.log(data.message);
+                $('#vision').html(data.message);
+            } else {
+                console.log("Oops...");
+            }
+        }
+    });
 });
 </script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
