@@ -221,8 +221,9 @@
                 </tbody>
             </table>
             <form><input type="hidden" name="url" id="url" disabled></form>
+            <p></p><br>
             <div id="vision" align="center"></div>
-        <p></p>
+        <br>
         </div>
         </div>
       </div>
