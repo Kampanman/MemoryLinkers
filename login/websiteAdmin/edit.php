@@ -7,13 +7,14 @@ if(isset($_POST['update']))
     $id = $_POST['id'];
     /* 入力値は「サニタイズ」（特殊文字の無害化）しておく */
     $name = htmlspecialchars($_POST['name'], ENT_QUOTES, "UTF-8");
+    $namesurl = htmlspecialchars($_POST['namesurl'], ENT_QUOTES, "UTF-8");
     $sight = htmlspecialchars($_POST['sight'], ENT_QUOTES, "UTF-8");
     $url = htmlspecialchars($_POST['url'], ENT_QUOTES, "UTF-8");
     $tag_1 = htmlspecialchars($_POST['tag_1'], ENT_QUOTES, "UTF-8");
     $tag_2 = htmlspecialchars($_POST['tag_2'], ENT_QUOTES, "UTF-8");
     
     
-        $result = mysqli_query($connect, "UPDATE $table_1 SET name='$name',sight='$sight',url='$url',tag_1='$tag_1',tag_2='$tag_2' WHERE id=$id");
+        $result = mysqli_query($connect, "UPDATE $table_1 SET name='$name',namesurl='$namesurl',sight='$sight',url='$url',tag_1='$tag_1',tag_2='$tag_2' WHERE id=$id");
         
         //redirectig to the display page. In our case, it is index.php
         header("Location:websiteAdmin.php"); /* 処理後にどこのファイルに遷移するか */
