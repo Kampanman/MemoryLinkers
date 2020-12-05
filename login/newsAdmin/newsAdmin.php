@@ -42,7 +42,7 @@
         body { font-family: "Sawarabi Gothic"; }
         
         a[href=""]{
-          all: inherit;
+          color: black;
           pointer-events:none;
         }
     </style>
