@@ -215,7 +215,7 @@
                     <tr>
                         <td class="showTube"><input type="hidden" value="<?php echo $row["id"];?>"><button class="btn btn-primary lets">視聴する</button></td>
                         <td><?php echo $row["name"];?></td>
-                        <td><a href="<?php echo $row["url"];?>" target="_blank" onClick="return confirm('このサイトに移動しますか？')"><?php echo $row["sight"];?></a></td>
+                        <td class="goLink"><a href="<?php echo $row["url"];?>" target="_blank" onClick="return confirm('このサイトに移動しますか？')"><?php echo $row["sight"];?></a></td>
                     </tr>
                     <?php } ?>
                 </tbody>
@@ -300,6 +300,16 @@ $('#example_4').DataTable({
     }
 });
 
+$('.lets').each(function(){
+    var click = $(this).parent();
+    var href = click.next("td").next("td").children("a").attr("href");
+    if(href.match(/watch\?v=/) && !href.match(/\&/)){
+      $(this).css("display","block"); 
+    } else {
+      $(this).css("display","none");
+    }
+});
+
 $('.lets').click(function(){
     var click = $(this).parent();
     var vidurl = click.next("td").next("td").children("a").attr("href");
@@ -323,6 +333,7 @@ $('.lets').click(function(){
         }
     });
 });
+
 </script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
 </body>
