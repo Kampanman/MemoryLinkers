@@ -54,8 +54,8 @@
             function contents(title,id){
               document.write(`<tr><td><span class='info' id='${id}'>${title}</span></td></tr>`)
             }
-
-            contents("押してください","push");contents("OKです","ok");
+	    // 定義した関数の形で、それぞれのテキストとidをスクリプトエリア内に記述してください。
+            contents("押してください","push"); contents("OKです","ok");
           </script>
           </tbody>
         </table>
@@ -95,18 +95,22 @@
   });
 </script>
 <script>
+  //メインリンク
   function listLink(title,url){
     return `<li><a href='${url}' target='_blank' onclick="return confirm('このサイトに移動しますか？')">${title}</a></li>`
   }
+  //メインリンクの補足リンク
   function listSub(title,url){
     return `<ul><li><a href='${url}' target='_blank' onclick="return confirm('このサイトに移動しますか？')">${title}</a></li></ul>`
   }
 </script>
 
 <script>
+  //テーブルのテキストに対応したidのクリック機能を、以下のように記述してください。
   $("#push").click(function(){
     document.getElementById("note").innerHTML = 
     "<ul>"+listLink("hogehoge","")+"</ul>";
+    //必ず"<ul>"と"</ul>"で括るように関数を記述してください。
   });
   $("#ok").click(function(){
     document.getElementById("note").innerHTML = 
