@@ -1,0 +1,80 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>わたしの "ググリンク" ノート</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Sawarabi+Gothic" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="myGoogLinks.css">
+</head>
+
+<body>
+	<div class="container">
+		
+    <div class="container">
+      <h2>わたしの "ググリンク" ノート</h2>
+      <p>普段から、読んだ本やウェブページの内容は、ネット上に散らばるコンテンツに繋ぎ留めることで記憶に残りやすくしておりますが、それだけでは些か心許ない、物足りない、だからより突き詰めて関連情報を収集して繋ぎ合わせたい、そうして元々の知識をもっと補強して盤石化していきたい！と思えたコンテンツを、当ページに纏めております。</p>
+      <br><br>
+      <div class="row col-sm-8">
+        <table id="example" class="display table table-striped">
+          <thead>
+            <tr><th>Note Title</th></tr>
+          </thead>
+          <tbody>
+          <script>
+            function contents(title,id){
+              document.write(`<tr><td><span class='info' id='${id}'>${title}</span></td></tr>`)
+            }
+          </script>
+              <script src="sample.js"></script>
+              <script src="sample2.js"></script>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <br>
+    <h2 id="name">上のテーブルからコンテンツを選択して下さい</h2><span id="hideSpan"><b>　について</b></span>
+    <br>
+    <div id="note"></div>
+
+  </div>
+  
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+  $('#example').DataTable({
+      responsive: true,
+      lengthChange: true,
+      info: false,
+      searching: true,
+      paging: true,
+      pagingType: "full_numbers",
+      lengthMenu: [ 10, 20, 50, 100 ],
+      columnDefs: [
+        { targets: 0, width: "50%" }
+      ],
+      language: {
+          url: "//cdn.datatables.net/plug-ins/1.10.20/i18n/Japanese.json"
+      }
+  });
+</script>
+<script>
+  $(".info").click(function(){
+    var val = $(this).text();
+    $("#name").text(val);
+    $('#hideSpan').css('display','inline');
+  });
+
+  function listLink(title,url){
+    return `<li><a href='${url}' target='_blank' onclick="return confirm('このサイトに移動しますか？')">${title}</a></li>`
+  }
+  function listSub(title,url){
+    return `<ul><li><a href='${url}' target='_blank' onclick="return confirm('このサイトに移動しますか？')">${title}</a></li></ul>`
+  }
+</script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+</body>
+</html>

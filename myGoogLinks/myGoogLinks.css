@@ -1,0 +1,25 @@
+body{
+  background-image: linear-gradient(0deg, transparent 31px, #cdcdcd 32px),linear-gradient(90deg,  transparent 31px, #cdcdcd 32px);
+  background-color:#fffdcb;
+  background-size: 32px 32px;
+  font-family: "Sawarabi Gothic";
+} 
+.info:hover{
+  cursor: pointer;
+  color: blue;
+  font-weight: 600;
+}
+h2+p {
+  font-size: small;
+  max-width: 750px;
+}
+li {font-size: 16px;}
+a {font-weight: 600;}
+a:hover{
+  cursor: pointer;
+  text-decoration: none;
+  color:rgb(255, 30, 125);
+}
+li {padding-bottom: 0.5em;}
+#name {display: inline-block;}
+#hideSpan {display: none;}
