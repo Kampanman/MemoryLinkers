@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,11 +29,35 @@
             function contents(title,id){
               document.write(`<tr><td><span class='info' id='${id}'>${title}</span></td></tr>`)
             }
-            function jumpLink(link){
-              document.write(`<span><b>　<a href='${link}' target='_blank'>リンク先へ</a></b></span>`)
-            }
           </script>
-              <script src="words2020.js"></script>
+              <script src="antiPoverty.js"></script>
+              <script src="basicPrograLit.js"></script>
+              <script src="backtoEconHist.js"></script>
+              <script src="brightJapEcon.js"></script>
+              <script src="basicITHunter.js"></script>
+              <script src="commuOrgs.js"></script>
+              <script src="ecoloReal.js"></script>
+              <script src="economy_90min.js"></script>
+              <script src="econSocial_18s.js"></script>
+              <script src="everyoneEcon.js"></script>
+              <script src="firstAid.js"></script>
+              <script src="gendaiWords2020.js"></script>
+              <script src="groundEmpower.js"></script>
+              <script src="hokenKnowledge.js"></script>
+              <script src="JapanClimate.js"></script>
+              <script src="JapanKraft2050.js"></script>
+              <script src="JapanTradit.js"></script>
+              <script src="japanRevival.js"></script>
+              <script src="JavaBasics.js"></script>
+              <script src="learnLaunchEcon.js"></script>
+              <script src="novel_shadowPrimeman.js"></script>
+              <script src="npDijest_202101.js"></script>
+              <script src="pocketPsyco.js"></script>
+              <script src="smartBosai.js"></script>
+              <script src="smartThinkAndTalk.js"></script>
+              <script src="toyoIgakuMethod.js"></script>
+              <script src="vitaminAminos.js"></script>
+              <script src="workingPoor.js"></script>
           </tbody>
         </table>
       </div>
@@ -43,7 +68,8 @@
     <div id="note"></div>
 
   </div>
-  
+
+<script src="gotoTop.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
@@ -69,13 +95,33 @@
     $("#name").text(val);
     $('#hideSpan').css('display','inline');
   });
+  function jumpLink(link){
+    return `<p><b>　<a href='${link}' target='_blank'target='_blank' onclick="return confirm('このサイトに移動しますか？')">リンク先へ</a></b></p>`
+  }
+  function factSort(id,word,subject,before,fact,after){
+    return `<h4 class="factSort" data-toggle="collapse" data-target="#${id}">
+      <span style="color:orange; cursor:pointer;">${word}</span> の事象整理
+    </h4>
+    <section class="collapse" id="${id}">
+      <ul>
+        <li>当事者・主体： ${subject}</li>
+        <li>ビフォア： ${before}</li>
+        <li>ファクト： ${fact}</li>
+        <li>アフター： ${after}</li>
+      </ul>
+    </section>
+    `
+  }
+  $(".factSort > span").click(function(){
 
+  });
   function listLink(title,url){
     return `<li><a href='${url}' target='_blank' onclick="return confirm('このサイトに移動しますか？')">${title}</a></li>`
   }
   function listSub(title,url){
     return `<ul><li><a href='${url}' target='_blank' onclick="return confirm('このサイトに移動しますか？')">${title}</a></li></ul>`
   }
+
 </script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
 </body>
