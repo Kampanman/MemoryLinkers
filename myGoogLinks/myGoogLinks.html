@@ -100,14 +100,14 @@
   }
   function factSort(id,word,subject,before,fact,after){
     return `<h4 class="factSort" data-toggle="collapse" data-target="#${id}">
-      <span style="color:orange; cursor:pointer;">${word}</span> の事象整理
+      〇 <span style="color:orange; cursor:pointer;">${word}</span> の事象整理
     </h4>
     <section class="collapse" id="${id}">
       <ul>
-        <li>当事者・主体： ${subject}</li>
-        <li>ビフォア： ${before}</li>
-        <li>ファクト： ${fact}</li>
-        <li>アフター： ${after}</li>
+        <li><b>当事者・主体：</b> <span style="color:green">${subject}</span></li>
+        <li><b>ビフォア：</b> <span style="color:green">${before}</span></li>
+        <li><b>ファクト：</b> <span style="color:green">${fact}</span></li>
+        <li><b>アフター：</b> <span style="color:green">${after}</span></li>
       </ul>
     </section>
     `
