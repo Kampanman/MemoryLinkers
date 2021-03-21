@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+</head>
+<body>
+<h2 id="theme"></h2>
+<div id="h4Area">
+  <h4 style="margin-left: 1em;">
+    《 テーマ 》<input type="text" id="h4_theme">
+    <button id="h4_clear" class="clear btn">クリア</button>
+    <button id="head_fire" class="btn" disabled>これで出力する</button>
+  </h4>
+</div>
+<p></p>
+<div id="returnUl" align="center">
+  <input type="button" class="btn returnUl" value="リスト開始">
+  <input type="button" class="btn returnUl" value="リスト終了" disabled>
+</div>
+<p></p>
+<div id="normaList" style="margin-left: 1em;">
+  <li style="list-style: none;"><label for="normalMemo"><b>《 箇条書きメモテキスト 》</b></label><input type="text" id="normalMemo" class="sight" disabled> <button class="clear btn">クリア</button></li>
+  <li style="margin-left: 2em; list-style: none;" align="center">
+    <button id="memo_fire" class="btn" disabled>これで出力する</button>
+  </li>
+</div>
+<div id="selectLink" style="margin-left: 1em;">
+  <li><label for=""><b>《 サイトタイトル 》</b></label><input type="text" id="sightTitle" class="sight" disabled> <button class="clear btn">クリア</button></li>
+  <li><label for=""><b>《 サイトURL 》</b></label><input type="text" id="sightLink" class="sight" disabled> <button class="clear btn">クリア</button></li>
+  <li><label for=""><b>《 キーワード 》</b></label><input type="text" id="keyword" class="sight" disabled> <button class="clear btn">クリア</button></li>
+    <li style="margin-left: 2em; list-style: none;" align="center">
+      <label for="listLink"><b>メインリンク：</b></label><input type="radio" name="link" id="listLink" checked>
+      <label for="listSub"><b>サブリンク：</b></label><input type="radio" name="link" id="listSub">
+      <button id="link_fire" class="btn" disabled>これで出力する</button>
+    </li>
+</div>
+<h4 class="factSort" style="margin-left: 1em;">
+  〇 <input type="text" id="factSymbol"> の事象整理 〇
+  <button class="clear btn" onclick="disabler()">クリア</button>
+</h4>
+<section class="collapse">
+  <ul>
+    <li class="lists"><label for="input_1"><b>《 当事者・主体 》</b></label> <input type="text" id="input_1" disabled> <button class="clear btn">クリア</button></li>
+    <li class="lists"><label for="input_2"><b>《 ビフォア 》</b></label> <input type="text" id="input_2" class="bfaBox" disabled> <button class="clear btn">クリア</button></li>
+    <li class="lists"><label for="input_3"><b>《 ファクト 》</b></label> <input type="text" id="input_3" class="bfaBox" disabled> <button class="clear btn">クリア</button></li>
+    <li class="lists"><label for="input_4"><b>《 アフター 》</b></label> <input type="text" id="input_4" class="bfaBox" disabled> <button class="clear btn">クリア</button></li>
+  </ul>
+  <div id="buttonArea">
+    <button id="fire" class="btn" disabled>これで出力する</button>
+    <button id="reset" class="btn" disabled onclick="disabler()">リセット</button><br>
+    <br>
+    <button id="targetClear" class="btn" style="width:80%">出力クリア</button>
+  </div>
+</section>
+<br>
+<div id="target" style="margin-left: 1em;"></div>
+<div id="copyBtnArea" align="center">
+  <button id="copy" class="btn">クリップボードにコピー</button>
+</div>
+<script>
+  /* タイトル */
+  var theme = "わたしのググリンクジェネレーター";
+  document.title = theme;
+
+  /* スタイル */
+  const dc = document;
+  dc.querySelector('body').style.backgroundColor = "#FFF555";
+  dc.querySelector('#theme').innerText = theme;
+  dc.querySelector('#theme').style.textAlign = "center";
+  dc.querySelector('#theme').style.color = "#150bad";
+  var btns = dc.getElementsByClassName("btn");
+  console.log(btns); // 配列になっている
+  for(let btn of btns){
+    btn.style.margin = "3px";
+    btn.style.borderRadius = "5px";
+    btn.style.cursor = "pointer";
+  }
+  function onOffColor(){
+    var btns = dc.getElementsByClassName("btn");
+    for(let btn of btns){
+      if(btn.disabled==true){
+        btn.style.color = "white";
+        btn.style.backgroundColor = "gray";
+        btn.style.opacity = "0.5";
+      }
+      if(btn.disabled==false){
+        btn.style.color = "white";
+        btn.style.backgroundColor = "#FF5522";
+        btn.style.opacity = "1";
+      }
+    }
+  }
+  onOffColor();
+
+  var input = dc.querySelectorAll('input');
+  console.log(input); // 配列になっている
+  for(let put of input){
+    put.style.borderRadius = "5px";
+  }
+  var labels = dc.querySelectorAll('label');
+  for(let label of labels){label.style.cursor = "pointer"}
+  var boxes = dc.getElementsByClassName('bfaBox');
+  for(let box of boxes){
+    box.style.width = "80%";
+  }
+  const symbol = dc.getElementById("factSymbol");
+  const input_1 = dc.getElementById("input_1");
+  const input_2 = dc.getElementById("input_2");
+  const input_3 = dc.getElementById("input_3");
+  const input_4 = dc.getElementById("input_4");
+  const h_tm = dc.getElementById("h4_theme");
+  const h_cl = dc.getElementById("h4_clear");
+  const s_title = dc.getElementById("sightTitle");
+  const s_link = dc.getElementById("sightLink");
+  const keyword = dc.getElementById("keyword");
+  const h_fire = dc.getElementById("head_fire");
+  const m_fire = dc.getElementById("memo_fire");
+  const l_fire = dc.getElementById("link_fire");
+  const fire = dc.getElementById("fire");
+  const reset = dc.getElementById("reset");
+  const tg = dc.getElementById("target");
+  const tg_c = dc.getElementById("targetClear");
+  const memo = dc.getElementById("normalMemo");
+  const h4_area = dc.getElementById("h4Area");
+  const b_area = dc.getElementById("buttonArea");
+  const copy = dc.getElementById("copy");
+  var styles = [h_fire.style,m_fire.style,l_fire.style,input_1.style, fire.style, reset.style, copy.style];
+  for(let style of styles){style.width = "40%"}
+  b_area.style.textAlign = "center";
+
+  function disabler(){
+    var inputs = [input_1,input_2,input_3,input_4,reset];
+    for(let input of inputs){
+      input.value = "";
+      input.disabled = true;
+      styles[1].fontWeight = "400";
+      styles[2].fontWeight = "400";
+    }
+    symbol.value = "";
+  }
+
+  /* ボタン・テキストボックスの機能 */
+  var returnUl = dc.getElementsByClassName("returnUl");
+  returnUl[0].addEventListener("click",function(){
+    returnUl[0].disabled=true;
+    returnUl[1].disabled=false;
+    memo.disabled=false;
+    s_title.disabled=false;
+    s_link.disabled=false;
+    keyword.disabled=false;
+    copy.disabled=true;
+    tg_c.disabled=true;
+    onOffColor();
+    tg.innerHTML += `\"&lt;ul&gt;\"+<br>`;
+  });
+  returnUl[1].addEventListener("click",function(){
+    returnUl[0].disabled=false;
+    returnUl[1].disabled=true;
+    memo.disabled=true;
+    s_title.disabled=true;
+    s_link.disabled=true;
+    keyword.disabled=true;
+    copy.disabled=false;
+    tg_c.disabled=false;
+    onOffColor();
+    tg.innerHTML += `\"&lt;\/ul&gt;\"+<br>`;
+  });
+  var clears = document.getElementsByClassName('clear');
+  for(let clear of clears){
+    clear.addEventListener('click',function(){
+        var textbox = this.previousSibling.previousSibling;
+        textbox.value = "";
+    },false);
+  }
+  var sights = dc.getElementsByClassName("sight");
+  for(let sight of sights){
+    sight.style.width = "70%";
+    sight.addEventListener("keyup",function(){
+      if(s_title.value != "" && s_link.value != "") {
+        l_fire.disabled = false;
+        onOffColor();
+      }
+      if(s_title.value == "" || s_link.value == "") {
+        l_fire.disabled = true;
+        onOffColor();
+      }
+    });
+  }
+  symbol.addEventListener("keyup",function(){
+    if(this.value != ""){
+      input_1.disabled = false;
+      var boxes = dc.getElementsByClassName('bfaBox');
+      for(let box of boxes){
+        box.disabled = false;
+      }
+    }
+    if(this.value == ""){
+      input_1.disabled = true;
+      var boxes = dc.getElementsByClassName('bfaBox');
+      for(let box of boxes){
+        box.disabled = true;
+      }
+    }
+    onOffColor();
+  });
+  memo.addEventListener("keyup",function(){
+    if(this.value != "") m_fire.disabled = false;
+    if(this.value == "") m_fire.disabled = true;
+    onOffColor();
+  });
+  h_tm.addEventListener("keyup",function(){
+    if(this.value != "") h_fire.disabled = false;
+    if(this.value == "") h_fire.disabled = true;
+    onOffColor();
+  });
+  h_cl.addEventListener("click",function(){
+    h_fire.disabled = true;
+    onOffColor();
+  });
+
+  for(let box of boxes){
+    box.addEventListener("keyup",function(){
+      if(
+        input_1.value != "" && input_2.value != "" &&
+        input_3.value != "" && input_4.value != ""
+        ) {
+          fire.disabled = false;
+          styles[1].fontWeight = "700";
+        }
+      if (
+        input_1.value == "" || input_2.value == "" ||
+        input_3.value == "" || input_4.value == ""
+        ) {
+          fire.disabled = true;
+          styles[1].fontWeight = "400";
+        }
+        onOffColor();
+    });
+  }
+
+  /**
+   * 出力系ボタン
+   */
+  h_fire.addEventListener("click",function(){
+    const tg = dc.getElementById("target");
+    var answer = confirm("ヘッダーを出力します。よろしいですか？");
+      if (answer == true) {
+        tg.innerHTML += `\"&lt;h4&gt;<b>${h_tm.value}</b>&lt;/h4&gt;\"+<br>`
+        this.disabled = true;
+        onOffColor();
+      } else {
+        return false;
+      }
+  });
+  m_fire.addEventListener("click",function(){
+    const tg = dc.getElementById("target");
+    var answer = confirm("箇条書きメモを出力します。よろしいですか？");
+      if (answer == true) {
+        tg.innerHTML += `\"&lt;li&gt;${memo.value}&lt;/li&gt;\"+<br>`
+        this.disabled = true;
+        onOffColor();
+      } else {
+        return false;
+      }
+  });
+  l_fire.addEventListener("click",function(){
+    /* ラジオボタンの選択状態取得 */
+    var links = document.getElementsByName("link");
+    var answer = confirm("リンクを出力します。よろしいですか？");
+      if (answer == true) {
+          if(links[0].checked==true){
+            if(sights[3].value!="") {
+              tg.innerHTML += `listLink_k(\"<b>${keyword.value}</b>\",\"<b>${s_title.value}</b>\",\"<b>${s_link.value}</b>\")+<br>`
+            }
+            else {
+              tg.innerHTML += `listLink(\"<b>${s_title.value}</b>\",\"<b>${s_link.value}</b>\")+<br>`                
+            }
+          };
+          if(links[1].checked==true){
+            if(sights[3].value!="") {
+              tg.innerHTML += `listsub_k(\"<b>${keyword.value}</b>\",\"<b>${s_title.value}</b>\",\"<b>${s_link.value}</b>\")+<br>`
+            }
+            else {            
+              tg.innerHTML += `listSub(\"<b>${s_title.value}</b>\",\"<b>${s_link.value}</b>\")+<br>`
+            }
+          };
+          sights[1].value = "";
+          sights[2].value = "";
+          sights[3].value = "";
+          this.disabled = true;
+          onOffColor()
+      } else {
+          return false;
+      }
+  });
+  fire.addEventListener("click",function(){
+    var answer = confirm("BFAを出力します。よろしいですか？");
+      if (answer == true) {
+        /* 日付設定 */
+        var today = new Date();
+        var strToday = String(today.getFullYear())+"\-"
+                      +String((today.getMonth()+1))+"\-"
+                      +String(today.getDate());
+        var strTime = String(today.getHours())+String(today.getMinutes())+String(today.getSeconds());
+        var strDate = strToday+"\-"+strTime;
+        tg.innerHTML += `
+          factSort(\"<b>${strDate}</b>\",\"<b>${symbol.value}</b>\",
+          \"<b>${input_1.value}</b>\",\"<b>${input_2.value}</b>\",\"<b>${input_3.value}</b>\",\"<b>${input_4.value}</b>\")+
+        <br>`;
+        this.disabled = true;
+        var inputs = [input_1,input_2,input_3,input_4];
+        for(let input of inputs){input.disabled = true};
+        reset.disabled = false;
+        styles[2].fontWeight = "700";
+        onOffColor();
+      } else {
+        return false;
+      }
+  });
+  dc.getElementById('targetClear').addEventListener('click',function(){
+    var answer = confirm("出力結果を消去します。よろしいですか？");
+      if (answer == true) {
+        tg.innerHTML = "";
+      } else {
+        return false;
+      }
+  });
+
+/**
+ * クリップボードコピー関数
+ * 入力値をクリップボードへコピーする
+ */
+ function copyTextToClipboard(){
+    // テキストエリアを用意する
+    var copyFrom = document.createElement("textarea");
+    // テキストエリアへ値をセット
+    copyFrom.textContent = document.getElementById("target").innerText;
+    // bodyタグの要素を取得
+    var bodyElm = document.getElementsByTagName("body")[0];
+    // 子要素にテキストエリアを配置
+    bodyElm.appendChild(copyFrom);
+    // テキストエリアの値を選択
+    copyFrom.select();
+    // コピーコマンド発行
+    var retVal = document.execCommand('copy');
+    // 追加テキストエリアを削除
+    bodyElm.removeChild(copyFrom);
+    // 処理結果を返却
+    return retVal;
+  }
+  copy.addEventListener("click",function(){
+    copyTextToClipboard();
+  });
+</script>
+
+</body>
+</html>
