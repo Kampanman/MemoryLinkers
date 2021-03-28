@@ -1,4 +1,4 @@
-$('tobody').append(contents("サンプルテーマ２","sample2"));
+$('tobody').append(contents("","","サンプルテーマ２","sample2"));
 
 $("#sample2").click(function(){
   document.getElementById("note").innerHTML = 
