@@ -144,7 +144,8 @@
 
   /* ボタン・テキストボックスの機能 */
   var returnUl = dc.getElementsByClassName("returnUl");
-  returnUl[0].addEventListener("click",function(){
+  function onUl(){
+    if(returnUl[0].disabled==false) tg.innerHTML += `\"&lt;ul&gt;\"+<br>`; 
     returnUl[0].disabled=true;
     returnUl[1].disabled=false;
     memo.disabled=false;
@@ -154,9 +155,10 @@
     copy.disabled=true;
     tg_c.disabled=true;
     onOffColor();
-    tg.innerHTML += `\"&lt;ul&gt;\"+<br>`;
-  });
-  returnUl[1].addEventListener("click",function(){
+  }
+  function offUl(){
+    document.activeElement.blur();
+    if(returnUl[0].disabled==true) tg.innerHTML += `\"&lt;\/ul&gt;\"+<br>`; 
     returnUl[0].disabled=false;
     returnUl[1].disabled=true;
     memo.disabled=true;
@@ -166,8 +168,15 @@
     copy.disabled=false;
     tg_c.disabled=false;
     onOffColor();
-    tg.innerHTML += `\"&lt;\/ul&gt;\"+<br>`;
+  }
+  // リスト開始・終了ボタンを押した場合
+  returnUl[0].addEventListener("click",function(){
+    onUl();
   });
+  returnUl[1].addEventListener("click",function(){
+    offUl();
+  });
+
   var clears = document.getElementsByClassName('clear');
   for(let clear of clears){
     clear.addEventListener('click',function(){
@@ -281,7 +290,7 @@
           };
           if(links[1].checked==true){
             if(sights[3].value!="") {
-              tg.innerHTML += `listsub_k(\"<b>${keyword.value}</b>\",\"<b>${s_title.value}</b>\",\"<b>${s_link.value}</b>\")+<br>`
+              tg.innerHTML += `listSub_k(\"<b>${keyword.value}</b>\",\"<b>${s_title.value}</b>\",\"<b>${s_link.value}</b>\")+<br>`
             }
             else {            
               tg.innerHTML += `listSub(\"<b>${s_title.value}</b>\",\"<b>${s_link.value}</b>\")+<br>`
@@ -354,6 +363,37 @@
   copy.addEventListener("click",function(){
     copyTextToClipboard();
   });
+
+  // ショートカットキーアクション
+  document.onkeydown = kd;
+  document.onkeyup = ku;
+  var keyStatus = {}; //keyのステータス
+  function kd(event){
+    //console.log(event.keyCode);
+    keyStatus[event.keyCode] = true;
+    if (keyStatus[18] && keyStatus[40]) onUl();
+    if (keyStatus[18] && keyStatus[38]) {
+      offUl();
+    }
+    if (keyStatus[18] && keyStatus[37]){
+      document.getElementById('listLink').checked=true;
+      document.getElementById('listSub').checked=false;
+    }
+    if (keyStatus[18] && keyStatus[39]){
+      document.getElementById('listLink').checked=false;
+      document.getElementById('listSub').checked=true;
+    }
+    if(sights[0].disabled==false){
+      if(keyStatus[18] && keyStatus[77]) sights[0].focus();
+    }
+    if(sights[1].disabled==false){
+      if(keyStatus[18] && keyStatus[84]) sights[1].focus();
+    }
+    if(sights[2].disabled==false){
+      if(keyStatus[18] && keyStatus[76]) sights[2].focus();
+    }
+  }
+  function ku(event) {keyStatus[event.keyCode] = false;}
 </script>
 
 </body>
