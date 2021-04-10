@@ -44,7 +44,7 @@ function auth(kw){
   }
   // 入力内容が一致しない場合は警告ダイアログを表示
   else if(question != "" && question != null){
-    window.alert(`キーワードに誤りがあるようです。\nキーワードは「${kw}」です。`);
+    window.prompt(`キーワードに誤りがあるようです。\nキーワードは「${kw}」です。`);
   }
   // 空の場合やキャンセルした場合はアラートを閉じる
   else{
