@@ -16,20 +16,10 @@ function factSort(id,word,subject,before,fact,after){
   `
 }
 function listLink(title,url){
-  return `<li><a href='${url}' target='_blank' onclick="return confirm('このサイトに移動しますか？')">${title}</a></li>`;
+  return `<li><input type='checkbox'><a href='${url}' target='_blank' onclick="return confirm('このサイトに移動しますか？')">${title}</a></li>`;
 }
 function listSub(title,url){
-  return `<ul><li><a href='${url}' target='_blank' onclick="return confirm('このサイトに移動しますか？')">${title}</a></li></ul>`;
-}
-function listLink_m(title,url){
-  return `<li><label><input type='checkbox'><span></span>
-    <a href='${url}' target='_blank' onclick="return confirm('このサイトに移動しますか？')">${title}</a>
-    </label></li>`;
-}
-function listSub_m(title,url){
-  return `<ul><li><label><input type='checkbox'><span></span>
-    <a href='${url}' target='_blank' onclick="return confirm('このサイトに移動しますか？')">${title}</a>
-    </label></li></ul>`;
+  return `<ul><li><input type='checkbox'><a href='${url}' target='_blank' onclick="return confirm('このサイトに移動しますか？')">${title}</a></li></ul>`;
 }
 
 function auth(kw){
@@ -44,7 +34,7 @@ function auth(kw){
   }
   // 入力内容が一致しない場合は警告ダイアログを表示
   else if(question != "" && question != null){
-    window.prompt(`キーワードに誤りがあるようです。\nキーワードは「${kw}」です。`);
+    window.prompt(`キーワードに誤りがあるようです。\nキーワードは次のとおりです。`,kw);
   }
   // 空の場合やキャンセルした場合はアラートを閉じる
   else{
@@ -52,8 +42,19 @@ function auth(kw){
   }
 }
 function listLink_k(kw,title,url){
-  return `<li><a href='${url}' target='_blank' onclick="auth('${kw}'); return false;">${title}</a></li>`;
+  return `<li><input type='checkbox'><a href='${url}' target='_blank' onclick="auth('${kw}'); return false;">${title}</a></li>`;
 }
 function listSub_k(kw,title,url){
-  return `<ul><li><a href='${url}' target='_blank' onclick="auth('${kw}'); return false;">${title}</a></li></ul>`;
+  return `<ul><li><input type='checkbox'><a href='${url}' target='_blank' onclick="auth('${kw}'); return false;">${title}</a></li></ul>`;
+}
+function addTx(type,text){
+  if(type=="h4"){
+    return `<h4>${text}</h4>`;
+  }else if(type=="br_h4"){
+    return `</ul><h4>${text}</h4><ul>`;
+  }else if(type=="br_h5"){
+    return `</ul><h5>${text}</h5><ul>`;
+  }else{
+    return `<h5>${text}</h5>`;
+  }
 }
